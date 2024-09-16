@@ -36,5 +36,9 @@ public class Locators {
     public String create_account = "[data-qa='create-account']";
 
     public String account_created_class = "[data-qa='account-created']";
+    public String continue_button = "[data-qa='continue-button']";
+
+    //Xpath locators
+    public String logged_as_class = "/html/body/header[@id='header']/div[@class='header-middle']/div[@class='container']/div[@class='row']/div[@class='col-sm-8']/div[@class='shop-menu pull-right']/ul[@class='nav navbar-nav']/li[10]/a";
 
 }

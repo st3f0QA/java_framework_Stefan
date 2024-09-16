@@ -113,7 +113,11 @@ public class Test_Methods {
         driver.findElement(By.cssSelector(locator.create_account)).click();
         String account_created_text = driver.findElement(By.cssSelector(locator.account_created_class)).getText();
         assertTrue(account_created_text.contains("ACCOUNT CREATED!"));
+        //continue
+        driver.findElement(By.cssSelector(locator.continue_button)).click();
+        //assert you are logged as Stefan
+        String logged_as_text = driver.findElement(By.xpath(locator.logged_as_class)).getText();
 
-
+        assertTrue(logged_as_text.contains("Logged in as Stefan"));
     }
 }
