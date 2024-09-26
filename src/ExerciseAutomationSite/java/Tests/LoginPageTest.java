@@ -12,25 +12,10 @@ public class LoginPageTest {
         signing.FailedLogin();
     }
     @Test
-    public void TestTheSignUp(){
+    public void TestTheSignUpAndLoggingOut(){
         signing.TestSignUp();
+        //log out
+        signing.LogOut();
     }
-//    @Test
-//    public void checkEmailAddressLogin(){
-////        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        // Locate the element with class 'login-form'
-//
-////        loginForm.click();
-//        // Get the value of the 'data-qa' attribute
-////        String dataQaValue = loginForm.getAttribute("data-qa");
-//
-//
-//
-//    }
-//    @Test
-//    public void closeTheDriver(){
-//        driver.quit();
-//    }
-
 
 }

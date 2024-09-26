@@ -6,9 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.interactions.Actions;
+
 
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.assertTrue;
 
@@ -17,7 +20,11 @@ public class Test_Methods {
     WebDriver driver;
     Locators locator = new Locators();
     String randomEmail = functions.generateRandomEmail();
-
+    String myUrl = "https://automationexercise.com/login";
+    private String emailLogin = "stsolov1@abv.bg";
+    private String emailSuccess = "stsolov@abv.bg";
+    private String password = "123456789Aa";
+    private String name = "Stefan";
 
     public Test_Methods() {
         ChromeProperties chromeProperties = new ChromeProperties();
@@ -26,16 +33,22 @@ public class Test_Methods {
         driver = new ChromeDriver(options);
     }
 
-    String myUrl = "https://automationexercise.com/login";
-    private String emailLogin = "stsolov1@abv.bg";
-    private String password = "123456789Aa";
-    private String name = "Stefan";
-
-    public void FailedLogin() {
-        driver.get(this.myUrl);
+    private void acceptCookies(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         WebElement button = driver.findElement(By.cssSelector(locator.accept_cookies_button));
         button.click();
+    }
+    private void login(String RequiredEmail,String RequiredPassword){
+        driver.findElement(By.xpath(locator.email_field)).sendKeys(RequiredEmail);
+        driver.findElement(By.xpath(locator.password_field)).sendKeys(RequiredPassword);
+        driver.findElement(By.xpath(locator.confirm_button)).click();
+        String loggedAs = driver.findElement(By.xpath(locator.logged_as_class)).getText();
+        assertTrue(loggedAs.contains("Logged in as"));
+    }
+
+    public void FailedLogin() {
+        driver.get(this.myUrl);
+        acceptCookies();
         // Type email and password
         driver.findElement(By.xpath(locator.email_field)).sendKeys(this.emailLogin);
         driver.findElement(By.xpath(locator.password_field)).sendKeys(this.password);
@@ -50,20 +63,13 @@ public class Test_Methods {
         } else {
             System.out.println("Error message is not displayed.");
         }
+
     }
     public void TestSignUp(){
         // put the rows below in if condition
 
         driver.get(this.myUrl);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        List<WebElement> buttons = driver.findElements(By.cssSelector(locator.accept_cookies_button));
-        if(buttons.size() > 0 ){
-            System.out.println("THERE IS A BUTTON");
-            driver.findElement(By.cssSelector(locator.accept_cookies_button)).click();
-        }else{
-            System.out.println("There is no button visible");
-
-        }
+        acceptCookies();
 //
         driver.findElement(By.cssSelector(locator.name_signup_field)).sendKeys(this.name);
         driver.findElement(By.cssSelector(locator.email_signup_field)).sendKeys(this.randomEmail);
@@ -119,5 +125,38 @@ public class Test_Methods {
         String logged_as_text = driver.findElement(By.xpath(locator.logged_as_class)).getText();
 
         assertTrue(logged_as_text.contains("Logged in as Stefan"));
+    }
+    public void LogOut(){
+        driver.get(this.myUrl);
+        acceptCookies();
+        driver.findElement(By.xpath(locator.log_out_button)).click();
+        String login_text = driver.findElement(By.cssSelector(locator.login_title)).getText();
+        assertTrue(login_text.contains("Login to your account"));
+        driver.quit();
+    }
+    public void AddProductToCart(){
+
+            driver.get(this.myUrl);
+            Actions action = new Actions(driver);
+            acceptCookies();
+            login(this.emailSuccess,this.password);
+            driver.findElement(By.xpath(locator.products_button)).click();
+            driver.findElement(By.xpath(locator.search_field_products)).sendKeys("Polo");
+            driver.findElement(By.xpath(locator.search_button)).click();
+
+            //Hover on the element
+            action.moveToElement(driver.findElement(By.xpath(locator.product_window))).perform();
+            //Check the value after the hover
+            String polo_value = driver.findElement(By.xpath(locator.value_after_hover)).getText();
+            assertTrue(polo_value.contains("Rs. 1500"),
+                    "Expected Polo product price to contain 'Rs. 1500' but found: " + polo_value);
+
+            String polo_name = driver.findElement(By.xpath(locator.polo_shirt_name)).getText();
+            assertTrue(polo_name.contains("Premium Polo T-Shirts"),
+                    "Expected Polo product name to contain 'Premium Polo T-Shirts' but found: " + polo_name);
+
+
+
+
     }
 }
