@@ -1,6 +1,7 @@
 package helpers;
 
 import java.util.Random;
+
 public class functions {
 
     // Method to generate a random email address

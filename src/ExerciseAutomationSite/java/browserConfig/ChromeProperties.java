@@ -1,5 +1,4 @@
 package browserConfig;
-
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class ChromeProperties {

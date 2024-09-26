@@ -1,17 +1,20 @@
-package helpers;
-import browserConfig.ChromeProperties;
+package Tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.interactions.Actions;
 
 
+import browserConfig.ChromeProperties;
+import helpers.Locators;
+import helpers.functions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.testng.Assert.assertTrue;
 
@@ -35,8 +38,19 @@ public class Test_Methods {
 
     private void acceptCookies(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        WebElement button = driver.findElement(By.cssSelector(locator.accept_cookies_button));
-        button.click();
+
+        By buttonLocator = By.cssSelector(".fc-button.fc-cta-consent.fc-primary-button");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement button = wait.until(ExpectedConditions.presenceOfElementLocated(buttonLocator));
+
+        if (button.isDisplayed()) {
+            System.out.println("The button is visible.");
+            // You can perform actions on the button here, e.g., click
+            button.click();
+        } else {
+            System.out.println("The button is not visible.");
+        }
+
     }
     private void login(String RequiredEmail,String RequiredPassword){
         driver.findElement(By.xpath(locator.email_field)).sendKeys(RequiredEmail);
@@ -128,7 +142,7 @@ public class Test_Methods {
     }
     public void LogOut(){
         driver.get(this.myUrl);
-        acceptCookies();
+//        acceptCookies();
         driver.findElement(By.xpath(locator.log_out_button)).click();
         String login_text = driver.findElement(By.cssSelector(locator.login_title)).getText();
         assertTrue(login_text.contains("Login to your account"));
