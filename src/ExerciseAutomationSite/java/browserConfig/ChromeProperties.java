@@ -8,7 +8,7 @@ public class ChromeProperties {
         options.addArguments("--start-maximized");
         options.addArguments("--disable-search-engine-choice-screen");
         options.addArguments("--disable-popup-blocking");
-
+        //fix
     }
     public ChromeOptions getChromeOptions() {
         if (options == null) {
