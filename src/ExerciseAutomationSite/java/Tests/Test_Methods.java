@@ -7,12 +7,18 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+
 
 
 import browserConfig.ChromeProperties;
 import helpers.Locators;
 import helpers.functions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -20,6 +26,7 @@ import static org.testng.Assert.assertTrue;
 
 
 public class Test_Methods {
+
     WebDriver driver;
     Locators locator = new Locators();
     String randomEmail = functions.generateRandomEmail();
@@ -30,10 +37,8 @@ public class Test_Methods {
     private String name = "Stefan";
 
     public Test_Methods() {
-        ChromeProperties chromeProperties = new ChromeProperties();
-        chromeProperties.SetChromeOptions();
-        ChromeOptions options = chromeProperties.getChromeOptions();
-        driver = new ChromeDriver(options);
+        ChromeProperties chromeProperties = new ChromeProperties(); // Initializes options and sets up WebDriverManager
+        driver = chromeProperties.createChromeDriver();
     }
 
     private void acceptCookies(){
@@ -148,29 +153,56 @@ public class Test_Methods {
         assertTrue(login_text.contains("Login to your account"));
         driver.quit();
     }
-    public void AddProductToCart(){
+    public void AddProductToCart(String SearchProduct, String ExpectedTitle){
 
             driver.get(this.myUrl);
             Actions action = new Actions(driver);
             acceptCookies();
             login(this.emailSuccess,this.password);
             driver.findElement(By.xpath(locator.products_button)).click();
-            driver.findElement(By.xpath(locator.search_field_products)).sendKeys("Polo");
+            driver.findElement(By.xpath(locator.search_field_products)).sendKeys(SearchProduct);
             driver.findElement(By.xpath(locator.search_button)).click();
 
             //Hover on the element
             action.moveToElement(driver.findElement(By.xpath(locator.product_window))).perform();
             //Check the value after the hover
             String polo_value = driver.findElement(By.xpath(locator.value_after_hover)).getText();
-            assertTrue(polo_value.contains("Rs. 1500"),
+            assertTrue(polo_value.contains(ExpectedTitle),
                     "Expected Polo product price to contain 'Rs. 1500' but found: " + polo_value);
 
             String polo_name = driver.findElement(By.xpath(locator.polo_shirt_name)).getText();
             assertTrue(polo_name.contains("Premium Polo T-Shirts"),
                     "Expected Polo product name to contain 'Premium Polo T-Shirts' but found: " + polo_name);
+            driver.findElement(By.xpath(locator.add_to_cart_button)).click();
+            WebElement modal = driver.findElement(By.xpath(locator.modal_added_product));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator.modal_added_product)));
+            String messageForAddedProduct = driver.findElement(By.xpath(locator.added_to_card_message)).getText();
+            assertTrue(messageForAddedProduct.contains("Your product has been added to cart." ));
 
-
-
+    }
+    public void AssertTheCart(String nameOfProduct){
+        driver.findElement(By.xpath(locator.view_cart_button_modal)).click();
+        String product_title = driver.findElement(By.xpath(locator.tshirt_in_cart)).getText();
+        assertTrue(product_title.contains(nameOfProduct),"The name doesnt match");
+        driver.findElement(By.xpath(locator.proceed_checkout_btn)).click();
+        //Assert the value
+        int Price = TransformElements(driver.findElement(By.xpath(locator.productPrice)));
+        int quantity = TransformElements(driver.findElement(By.xpath(locator.quantity_product)));
+        int totalPrice = TransformElements(driver.findElement(By.xpath(locator.totalPrice)));
+        AssertValue(Price,quantity,totalPrice);
+        driver.findElement(By.xpath(locator.placeOrder)).click();
+    }
+    private void AssertValue(int priceOfProduct, int quantity, int expectedPrice){
+        Assert.assertEquals(expectedPrice, priceOfProduct * quantity);
+    }
+    private int TransformElements(WebElement element){
+        String str = element.getText();
+        // Extract the part after "Rs. "
+        String numberOnly = str.replaceAll("[^0-9]", "");
+        // Convert to integer
+        int value = Integer.parseInt(numberOnly);
+        return value;
 
     }
 }

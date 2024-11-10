@@ -50,4 +50,20 @@ public class Locators {
     public String product_window = "/html/body/section[2]/div[@class='container']/div[@class='row']/div[@class='col-sm-9 padding-right']/div[@class='features_items']/div[@class='col-sm-4']";
     public String value_after_hover = "/html/body/section[2]/div[@class='container']/div[@class='row']/div[@class='col-sm-9 padding-right']/div[@class='features_items']/div[@class='col-sm-4']/div[@class='product-image-wrapper']/div[@class='single-products']/div[@class='product-overlay']/div[@class='overlay-content']/h2";
     public String polo_shirt_name = "/html/body/section[2]/div[@class='container']/div[@class='row']/div[@class='col-sm-9 padding-right']/div[@class='features_items']/div[@class='col-sm-4']/div[@class='product-image-wrapper']/div[@class='single-products']/div[@class='product-overlay']/div[@class='overlay-content']/p";
+    //buttons
+    public String add_to_cart_button = "/html/body/section[2]/div[@class='container']/div[@class='row']/div[@class='col-sm-9 padding-right']/div[@class='features_items']/div[@class='col-sm-4']/div[@class='product-image-wrapper']/div[@class='single-products']/div[@class='product-overlay']/div[@class='overlay-content']/a[@class='btn btn-default add-to-cart']";
+    //messages
+    public String added_to_card_message = "/html/body/section[2]/div[@class='container']/div[@class='row']/div[@class='col-sm-9 padding-right']/div[@class='features_items']/div[@id='cartModal']/div[@class='modal-dialog modal-confirm']/div[@class='modal-content']/div[@class='modal-body']/p[@class='text-center'][1]";
+    //modal
+    public String modal_added_product = "/html/body/section[2]/div[@class='container']/div[@class='row']/div[@class='col-sm-9 padding-right']/div[@class='features_items']/div[@id='cartModal']/div[@class='modal-dialog modal-confirm']/div[@class='modal-content']";
+    public String view_cart_button_modal = "/html/body/section[2]/div[@class='container']/div[@class='row']/div[@class='col-sm-9 padding-right']/div[@class='features_items']/div[@id='cartModal']/div[@class='modal-dialog modal-confirm']/div[@class='modal-content']/div[@class='modal-body']/p[@class='text-center'][2]/a/u";
+    public String tshirt_in_cart = "/html/body/section[@id='cart_items']/div[@class='container']/div[@id='cart_info']/table[@id='cart_info_table']/tbody/tr[@id='product-30']/td[@class='cart_description']/h4/a";
+    //cart section
+    public String proceed_checkout_btn = "/html/body/section[@id='cart_items']/div[@class='container']/section[@id='do_action']/div[@class='container']/div[@class='row']/div[@class='col-sm-6']/a[@class='btn btn-default check_out']";
+    public String productPrice = "/html/body/section[@id='cart_items']/div[@class='container']/div[@id='cart_info']/table[@class='table table-condensed']/tbody/tr[@id='product-30']/td[@class='cart_price']/p";
+    public String quantity_product = "/html/body/section[@id='cart_items']/div[@class='container']/div[@id='cart_info']/table[@class='table table-condensed']/tbody/tr[@id='product-30']/td[@class='cart_quantity']/button[@class='disabled']";
+    public String totalPrice = "/html/body/section[@id='cart_items']/div[@class='container']/div[@id='cart_info']/table[@class='table table-condensed']/tbody/tr[@id='product-30']/td[@class='cart_total']/p[@class='cart_total_price']";
+    public String placeOrder = "/html/body/section[@id='cart_items']/div[@class='container']/div[7]/a[@class='btn btn-default check_out']";
+
+
 }

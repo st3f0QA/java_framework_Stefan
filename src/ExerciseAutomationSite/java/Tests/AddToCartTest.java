@@ -6,6 +6,7 @@ public class AddToCartTest {
 
     @Test
     public void addToCart(){//not finished
-        test.AddProductToCart();
+        test.AddProductToCart("Polo","Rs. 1500");
+        test.AssertTheCart("Premium Polo T-Shirts");
     }
 }
