@@ -2,31 +2,17 @@ package Tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-
-
-
 import browserConfig.ChromeProperties;
 import helpers.Locators;
 import helpers.functions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 import java.time.Duration;
-
 import static org.testng.Assert.assertTrue;
-
-
 public class Test_Methods {
-
     WebDriver driver;
     Locators locator = new Locators();
     String randomEmail = functions.generateRandomEmail();
@@ -43,14 +29,12 @@ public class Test_Methods {
 
     private void acceptCookies(){
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
         By buttonLocator = By.cssSelector(".fc-button.fc-cta-consent.fc-primary-button");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement button = wait.until(ExpectedConditions.presenceOfElementLocated(buttonLocator));
 
         if (button.isDisplayed()) {
             System.out.println("The button is visible.");
-            // You can perform actions on the button here, e.g., click
             button.click();
         } else {
             System.out.println("The button is not visible.");
