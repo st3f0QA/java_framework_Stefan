@@ -160,8 +160,8 @@ public class Test_Methods {
             assertTrue(polo_name.contains("Premium Polo T-Shirts"),
                     "Expected Polo product name to contain 'Premium Polo T-Shirts' but found: " + polo_name);
             driver.findElement(By.xpath(locator.add_to_cart_button)).click();
-            WebElement modal = driver.findElement(By.xpath(locator.modal_added_product));
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+//            WebElement modal = driver.findElement(By.xpath(locator.modal_added_product));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator.modal_added_product)));
             String messageForAddedProduct = driver.findElement(By.xpath(locator.added_to_card_message)).getText();
             assertTrue(messageForAddedProduct.contains("Your product has been added to cart." ));
