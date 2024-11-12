@@ -1,0 +1,22 @@
+Overview
+This repository is part of my ongoing journey as a Quality Assurance Automation Engineer.
+As I already have experience with writing tests in Cypress(JS), it serves as a personal
+learning project where I’m gaining hands-on experience with Java-based automation testing
+and refining my skills in designing, implementing, and maintaining automated test suites.
+This project is primarily focused on understanding and applying core automation QA
+principles and practices, such as test automation frameworks, scripting, and test
+validation.
+
+I’ll continue expanding this project with additional techniques, including SQL queries
+and other advanced testing strategies, as I work to deepen my expertise in QA automation.
+
+The main objectives of this project are to:
+
+Practice Java as the primary language for creating robust, maintainable test scripts
+Build a foundational understanding of automation testing frameworks and techniques
+Improve my skills in test validation, data management, and troubleshooting
+Experiment with SQL queries and other complementary tools to enhance the test automation
+process
+This project is intended as a learning exercise, focused on my professional growth in QA
+automation. It remains a work in progress as I continue to add features, refine scripts,
+explore new techniques.
