@@ -178,7 +178,9 @@ public class Test_Methods {
         int totalPrice = TransformElements(driver.findElement(By.xpath(locator.totalPrice)));
         AssertValue(Price,quantity,totalPrice);
         driver.findElement(By.xpath(locator.placeOrder)).click();
-        driver.quit(); //continue from here
+        WebElement payAndConfirm = driver.findElement(By.xpath(locator.payAndConfirmButton));
+        payAndConfirm.isDisplayed();
+        driver.quit();
 
     }
     private void AssertValue(int priceOfProduct, int quantity, int expectedPrice){

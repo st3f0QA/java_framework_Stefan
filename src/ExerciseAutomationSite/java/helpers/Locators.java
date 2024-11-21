@@ -64,6 +64,7 @@ public class Locators {
     public String quantity_product = "/html/body/section[@id='cart_items']/div[@class='container']/div[@id='cart_info']/table[@class='table table-condensed']/tbody/tr[@id='product-30']/td[@class='cart_quantity']/button[@class='disabled']";
     public String totalPrice = "/html/body/section[@id='cart_items']/div[@class='container']/div[@id='cart_info']/table[@class='table table-condensed']/tbody/tr[@id='product-30']/td[@class='cart_total']/p[@class='cart_total_price']";
     public String placeOrder = "/html/body/section[@id='cart_items']/div[@class='container']/div[7]/a[@class='btn btn-default check_out']";
+    public String payAndConfirmButton = "/html/body/section[@id='cart_items']/div[@class='container']/div[@class='payment-information']/div[@class='row']/div[@class='col-md-4'][2]/form[@id='payment-form']/div[@class='form-row'][5]/div[@class='col-md-12 form-group']/button[@id='submit']";
 
 
 }
